@@ -59,3 +59,16 @@ app.post('/result', (req, res) => {
     });
 });
 
+app.get('/results', (req, res) => {
+    usersdb.collection('users').find().toArray((err, result) => {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        if (result) {
+            res.send(JSON.stringify(result));
+        } else {
+            res.sendStatus(404);
+        }
+    })
+});
+
