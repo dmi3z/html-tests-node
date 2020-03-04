@@ -49,7 +49,7 @@ app.get('/questions', (req, res) => {
     })
 });
 
-app.get('/result', (req, res) => {
+app.post('/result', (req, res) => {
     const data = req.body;
     usersdb.collection('users').insertOne(data, (response, error) => {
         if (error) {
