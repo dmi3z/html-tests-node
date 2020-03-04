@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-MongoClient.connect('mongodb+srv://dmi3z:n2zk8hp60l@cluster0-gqqqu.mongodb.net/test?retryWrites=true&w=majority', (err, database) => {
+MongoClient.connect('mongodb+srv://dmi3z:n2zk8hp60l@tests-db-sxxgo.mongodb.net/test?retryWrites=true&w=majority', (err, database) => {
     if (err) {
         return console.log(err);
     }
@@ -33,5 +33,19 @@ MongoClient.connect('mongodb+srv://dmi3z:n2zk8hp60l@cluster0-gqqqu.mongodb.net/t
 
 // --------- API --------------
 app.get('/', (_, res) => {
-    res.send('Welcome to MegaShop API');
+    res.send('Welcome to TestsHtml API');
 });
+
+app.get('/questions', (req, res) => {
+    questionsdb.collection('questions').find().toArray((err, result) => {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        if (result) {
+            res.send(JSON.stringify(result));
+        } else {
+            res.sendStatus(404);
+        }
+    })
+});
+
