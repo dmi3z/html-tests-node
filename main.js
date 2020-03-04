@@ -49,3 +49,13 @@ app.get('/questions', (req, res) => {
     })
 });
 
+app.get('/result', (req, res) => {
+    const data = req.body;
+    usersdb.collection('users').insertOne(data, (response, error) => {
+        if (error) {
+            return res.sendStatus(500);
+        }
+        return res.send(1);
+    });
+});
+
